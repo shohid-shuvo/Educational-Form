@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Enrollment Form</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="form-container">
+  <div class="form-header">Student Enrollment Form</div>
+  <form id="enrollmentForm" class="needs-validation" novalidate>
+    
+    <!-- Choose Preferred Course -->
+    <div class="mb-3">
+      <label for="preferredCourse" class="form-label">Choose Preferred Course*</label>
+      <select class="form-select" id="preferredCourse" required>
+        <option value="">--Please choose--</option>
+        <option value="1">Smart Office Management (Word, Excel, PPT)</option>
+        <option value="2">Web Development</option>
+        <!-- Add other options here -->
+      </select>
+      <div class="invalid-feedback">Please select a course.</div>
+    </div>
+    
+    <!-- Student's Name -->
+    <div class="mb-3">
+      <label for="studentName" class="form-label">Student’s Name*</label>
+      <input type="text" class="form-control" id="studentName" placeholder="Enter Name" required>
+      <div class="invalid-feedback">Please enter your name.</div>
+    </div>
+    
+    <!-- Father’s Name -->
+    <div class="mb-3">
+      <label for="fatherName" class="form-label">Father’s Name*</label>
+      <input type="text" class="form-control" id="fatherName" placeholder="Enter Father's Name" required>
+      <div class="invalid-feedback">Please enter father's name.</div>
+    </div>
+
+    <!-- Mother’s Name -->
+    <div class="mb-3">
+      <label for="motherName" class="form-label">Mother’s Name*</label>
+      <input type="text" class="form-control" id="motherName" placeholder="Enter Mother's Name" required>
+      <div class="invalid-feedback">Please enter mother's name.</div>
+    </div>
+    
+    <!-- Date of Birth -->
+    <div class="mb-3">
+      <label for="dob" class="form-label">Date of Birth*</label>
+      <input type="date" class="form-control" id="dob" required>
+      <div class="invalid-feedback">Please enter date of birth.</div>
+    </div>
+
+    <!-- 6. Mobile* -->
+    <div class="mb-3">
+        <label for="mobile" class="form-label">Mobile*</label>
+        <input type="tel" class="form-control" id="mobile" placeholder="Enter Mobile" required>
+        <div class="invalid-feedback">Please enter your mobile number.</div>
+      </div>
+  
+      <!-- 7. Email* -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email*</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter Email" required>
+        <div class="invalid-feedback">Please enter your email.</div>
+      </div>
+
+    <!-- 8. Guardian's Mobile* -->
+    <div class="mb-3">
+        <label for="guardianMobile" class="form-label">Guardian's Mobile*</label>
+        <input type="tel" class="form-control" id="guardianMobile" placeholder="Enter Guardian's Mobile" required>
+        <div class="invalid-feedback">Please enter the guardian's mobile number.</div>
+      </div>
+  
+      <!-- 9. Present Address* -->
+      <div class="mb-3">
+        <label for="presentAddress" class="form-label">Present Address*</label>
+        <input type="text" class="form-control" id="presentAddress" placeholder="Enter Present Address" required>
+        <div class="invalid-feedback">Please enter the present address.</div>
+      </div>
+  
+      <!-- 10. Permanent Address -->
+      <div class="mb-3">
+        <label for="permanentAddress" class="form-label">Permanent Address</label>
+        <input type="text" class="form-control" id="permanentAddress" placeholder="Enter Permanent Address">
+      </div>
+  
+      <!-- 11. Gender* -->
+      <div class="mb-3">
+        <label class="form-label">Gender*</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="male" value="male" required>
+          <label class="form-check-label" for="male">Male</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="female" value="female" required>
+          <label class="form-check-label" for="female">Female</label>
+        </div>
+        <div class="invalid-feedback">Please select your gender.</div>
+      </div>
+  
+      <!-- 12. National ID/Birth Certificate No.* -->
+      <div class="mb-3">
+        <label for="nid" class="form-label">National ID/Birth Certificate No.*</label>
+        <input type="text" class="form-control" id="nid" placeholder="Enter NID" required>
+        <div class="invalid-feedback">Please enter your National ID or Birth Certificate number.</div>
+      </div>
+  
+      <!-- 13. Religion -->
+      <div class="mb-3">
+        <label for="religion" class="form-label">Religion*</label>
+        <select class="form-select" id="religion" required>
+          <option value="">Select</option>
+          <option value="Islam">Islam</option>
+          <option value="Hindu">Hindu</option>
+          <option value="Christian">Christian</option>
+          <option value="Buddhism">Buddhism</option>
+          <option value="Others">Others</option>
+        </select>
+        <div class="invalid-feedback">Please select your religion.</div>
+      </div>
+
+    <!-- Passport Size Image -->
+    <div class="mb-3">
+      <label for="imageUpload" class="form-label">Passport Size Image (max size: 1MB, .jpg, .png, .jpeg)*</label>
+      <input class="form-control" type="file" id="imageUpload" accept=".jpg, .jpeg, .png" required>
+      <div class="invalid-feedback">Please upload an image (max 1MB).</div>
+    </div>
+
+    <!-- 15. Educational Level* -->
+    <div class="mb-3">
+        <label for="edulev" class="form-label">Educational Level*</label>
+        <select name="edulev" id="edulev" class="form-control" required>
+          <option value="">Select Level</option>
+          <option value="Bachelor (Third Year)">Bachelor (Third Year)</option>
+          <option value="Bachelor (Fourth Year)">Bachelor (Fourth Year)</option>
+          <option value="Bachelor Completed">Bachelor Completed</option>
+          <option value="Masters (First Year)">Masters (First Year)</option>
+          <option value="Masters (Second Year)">Masters (Second Year)</option>
+          <option value="Masters Completed">Masters Completed</option>
+          <option value="Diploma (Third Year)">Diploma (Third Year)</option>
+          <option value="Diploma (Fourth Year)">Diploma (Fourth Year)</option>
+          <option value="Diploma Completed">Diploma Completed</option>
+          <option value="Fazil (Third Year)">Fazil/ Equivalent (Third Year)</option>
+          <option value="Fazil (Fourth Year)">Fazil/ Equivalent (Fourth Year)</option>
+          <option value="Fazil Completed">Fazil/ Equivalent Completed</option>
+        </select>
+        <div class="invalid-feedback">Please select your educational level.</div>
+      </div>
+  
+      <!-- 16. Department/Subject/Group* -->
+      <div class="mb-3">
+        <label for="deptSubject" class="form-label">Department/Subject/Group*</label>
+        <input type="text" class="form-control" id="deptSubject" placeholder="Enter Department/Subject/Group" required>
+        <div class="invalid-feedback">Please enter your Department/Subject/Group.</div>
+      </div>
+  
+      <!-- 17. Do you Require Physical Assistance? -->
+      <div class="mb-3">
+        <label for="physicalAssistance" class="form-label">Do you Require Physical Assistance?*</label>
+        <select name="physicalAssistance" id="physicalAssistance" class="form-control" required>
+          <option value="">Select</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+        <div class="invalid-feedback">Please select if you require physical assistance.</div>
+      </div>
+
+      <!-- 16. Trainee's University/Institute/College Name* -->
+    <div class="mb-3">
+        <label for="uni" class="form-label">Trainee's University/Institute/College Name*</label>
+        <select id="uni" name="uni" onchange="CheckColors(this.value);" class="form-control" required>
+          <option value="">Select University/Institute/College</option>
+          <option value="Khulna University of Engineering and Technology">Khulna University of Engineering and Technology</option>
+          <option value="Khulna Mohila Polytechnic Institute">Khulna Mohila Polytechnic Institute</option>
+          <option value="Northern University of Business and Technology, Khulna">Northern University of Business and Technology, Khulna</option>
+          <option value="North Western University, Khulna">North Western University, Khulna</option>
+          <option value="Azam Khan Govt. Commerce College, Khulna">Azam Khan Govt. Commerce College, Khulna</option>
+          <option value="Govt. Brajalal College, Khulna">Govt. Brajalal College, Khulna</option>
+          <option value="Govt. Sundarban Adarsha College, Khulna">Govt. Sundarban Adarsha College, Khulna</option>
+          <option value="Khulna Polytechnic Institute">Khulna Polytechnic Institute</option>
+          <option value="City Polytechnic Institute, Khulna">City Polytechnic Institute, Khulna</option>
+          <option value="Bangabandhu Sheikh Mujibur Rahman Science and Technology University, Gopalganj">Bangabandhu Sheikh Mujibur Rahman Science and Technology University, Gopalganj</option>
+          <option value="Khulna Govt. Girls College">Khulna Govt. Girls College</option>
+          <option value="Govt. Phultala Mohila College">Govt. Phultala Mohila College</option>
+          <option value="Phultala MM College">Phultala MM College</option>
+          <option value="Noapara Model College">Noapara Model College</option>
+          <option value="Noapara Government College">Noapara Government College</option>
+          <option value="Daulatpur Day-Night College">Daulatpur Day-Night College</option>
+          <option value="others">Others</option>
+        </select>
+        <div class="invalid-feedback">Please select your university/institute/college.</div>
+      </div>
+
+    <!-- Password and Confirm Password -->
+    <div class="mb-3">
+      <label for="password" class="form-label">Password*</label>
+      <input type="password" class="form-control" id="password" placeholder="Min. 8 characters" required minlength="8">
+      <div class="invalid-feedback">Please enter a password (min. 8 characters).</div>
+    </div>
+    <div class="mb-3">
+      <label for="confirmPassword" class="form-label">Confirm Password*</label>
+      <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required minlength="8">
+      <div class="invalid-feedback">Passwords do not match.</div>
+    </div>
+
+    <!-- Enroll Button -->
+    <button type="submit"  class="btn btn-success w-100">Enroll</button>
+
+  </form>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/my_custom.js"></script>
+</body>
+</html>
