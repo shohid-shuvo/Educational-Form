@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 } else {
     // Connection successful
     ?>
-    <div id="connectionMessage" style="display: none; color: #fff;">
+    <!-- <div id="connectionMessage" style="display: none; color: #fff;">
         Database connection successful!
     </div>
     <script>
@@ -29,7 +29,7 @@ if ($conn->connect_error) {
         setTimeout(() => {
             messageDiv.style.display = 'none'; // Hide the message
         }, 2000);
-    </script>
+    </script> -->
     <?php
 }
 

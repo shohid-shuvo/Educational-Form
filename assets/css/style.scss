@@ -107,3 +107,46 @@
     }
     
 }
+
+.sdl_course_mngmnt{
+    .container {
+        width: 80%;
+        margin: 0 auto;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    th, td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+    
+    th {
+        background-color: #f4f4f4;
+    }
+    
+    button {
+        padding: 13px 10px;
+        margin: 5px;
+        background-color: #ff4d4d;
+        border: none;
+        color: white;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    
+    button:hover {
+        background-color: #ff1a1a;
+    }
+    
+    input[type="text"] {
+        padding: 10px;
+        width: 80%;
+        margin-bottom: 20px;
+    }
+    
+}

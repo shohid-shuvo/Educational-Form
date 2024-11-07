@@ -1,48 +1,91 @@
 <?php
-include '../connect.php';  // Include the database connection file
+include('../connect.php');
 
-// Fetch existing courses
-$query = "SELECT * FROM courses";
-$result = mysqli_query($conn, $query);
+// Fetch courses where status is 1 (active)
+$sql = "SELECT * FROM courses WHERE status = 1"; // Fetch only active courses
+$result = $conn->query($sql);
+
+// Handle soft delete (update status to 0)
+if (isset($_POST['courseId'])) {
+    $courseId = $_POST['courseId'];
+
+    // Soft delete the course by updating status to 0
+    $deleteSql = "UPDATE courses SET status = 0 WHERE id = ?";
+    $stmt = $conn->prepare($deleteSql);
+    $stmt->bind_param("i", $courseId);
+
+    if ($stmt->execute()) {
+        echo "Course marked as deleted successfully";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+    exit; // Stop further script execution
+}
+
+// Insert new course
+if (isset($_POST['courseName'])) {
+    $courseName = $_POST['courseName'];
+
+    // Insert the course with status set to 1 (active)
+    $stmt = $conn->prepare("INSERT INTO courses (course_name, status) VALUES (?, 1)");
+    $stmt->bind_param("s", $courseName);
+
+    if ($stmt->execute()) {
+        echo "Course added successfully";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+    $conn->close();
+}
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Courses</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
+    <div class="sdl_course_mngmnt">
+        <div class="container">
+            <h2>Manage Courses</h2>
 
-<h2>Manage Courses</h2>
+            <!-- Add Course Form -->
+            <form id="addCourseForm">
+                <input type="text" id="courseName" name="courseName" placeholder="Enter Course Name" required>
+                <button type="submit">Add Course</button>
+            </form>
 
-<!-- Add Course Form -->
-<form action="add_course.php" method="POST">
-    <input type="text" name="course_name" placeholder="Enter new course" required>
-    <button type="submit">Add Course</button>
-</form>
-
-<!-- Courses Table -->
-<table border="1">
-    <tr>
-        <th>Course ID</th>
-        <th>Course Name</th>
-        <th>Status</th>
-        <th>Action</th>
-    </tr>
-    <?php while ($row = mysqli_fetch_assoc($result)): ?>
-        <tr>
-            <td><?php echo $row['id']; ?></td>
-            <td><?php echo $row['course_name']; ?></td>
-            <td><?php echo $row['status'] == 1 ? 'Active' : 'Inactive'; ?></td>
-            <td>
-                <form action="delete_course.php" method="POST" style="display:inline;">
-                    <input type="hidden" name="course_id" value="<?php echo $row['id']; ?>">
-                    <button type="submit" onclick="return confirm('Are you sure you want to delete this course?')">Delete</button>
-                </form>
-            </td>
-        </tr>
-    <?php endwhile; ?>
-</table>
-
-</body>
-</html>
+            <h3>Course List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($row = $result->fetch_assoc()) { ?>
+                        <tr>
+                            <td><?php echo $row['course_name']; ?></td>
+                            <td>
+                                <!-- Soft delete button (mark as deleted) -->
+                                <button class="deleteCourseBtn" data-id="<?php echo $row['id']; ?>">Delete</button>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+<script src="../assets/js/my_custom.js"></script>

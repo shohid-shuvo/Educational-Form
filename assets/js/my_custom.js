@@ -143,7 +143,6 @@ $(document).ready(function() {
                         rowElement.fadeOut();;
                     }
                 },
-
                 // Hide spinner once the request completes
                 complete: function() {
                     $('#loadingSpinner').hide();
@@ -157,7 +156,48 @@ $(document).ready(function() {
     });
 });
 
+// courses managemnet
+document.getElementById('addCourseForm').addEventListener('submit', function(event) {
+    event.preventDefault();
 
+    var courseName = document.getElementById('courseName').value;
+
+    var formData = new FormData();
+    formData.append('courseName', courseName);
+
+    fetch('../course_management/manage_courses.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        // alert(data);
+        location.reload(); // Reload the page to show the updated course list
+    })
+    .catch(error => console.error('Error:', error));
+});
+
+// Handle course soft deletion (mark as deleted) using AJAX
+document.querySelectorAll('.deleteCourseBtn').forEach(function(button) {
+    button.addEventListener('click', function() {
+        var courseId = this.getAttribute('data-id');
+
+        var formData = new FormData();
+        formData.append('courseId', courseId);
+
+        fetch('../course_management/manage_courses.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            // alert(data);
+            location.reload(); // Reload the page to remove the deleted course from the list
+        })
+        .catch(error => console.error('Error:', error));
+    });
+});
+    
 
 
 
