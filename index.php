@@ -183,38 +183,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="invalid-feedback">Please enter your Department/Subject/Group.</div>
       </div>
   
-      <!-- 17. Do you Require Physical Assistance? -->
-      <!-- <div class="mb-3">
-        <label for="physicalAssistance" class="form-label ">Do you Require Physical Assistance?*</label>
-        <select name="physicalAssistance" id="physicalAssistance" class="form-control form-select" required>
-          <option value="">Select</option>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
-        </select>
-        <div class="invalid-feedback">Please select if you require physical assistance.</div>
-      </div> -->
-
       <!-- 16. Trainee's University/Institute/College Name* -->
     <div class="mb-3">
         <label for="uni" class="form-label">Trainee's University/Institute/College Name*</label>
         <select id="uni" name="uni" onchange="CheckColors(this.value);" class="form-control form-select" required>
-          <option value="">Select University/Institute/College</option>
-          <option value="Khulna University of Engineering and Technology">Khulna University of Engineering and Technology</option>
-          <option value="Khulna Mohila Polytechnic Institute">Khulna Mohila Polytechnic Institute</option>
-          <option value="Northern University of Business and Technology, Khulna">Northern University of Business and Technology, Khulna</option>
-          <option value="North Western University, Khulna">North Western University, Khulna</option>
-          <option value="Azam Khan Govt. Commerce College, Khulna">Azam Khan Govt. Commerce College, Khulna</option>
-          <option value="Govt. Brajalal College, Khulna">Govt. Brajalal College, Khulna</option>
-          <option value="Govt. Sundarban Adarsha College, Khulna">Govt. Sundarban Adarsha College, Khulna</option>
-          <option value="Khulna Polytechnic Institute">Khulna Polytechnic Institute</option>
-          <option value="City Polytechnic Institute, Khulna">City Polytechnic Institute, Khulna</option>
-          <option value="Bangabandhu Sheikh Mujibur Rahman Science and Technology University, Gopalganj">Bangabandhu Sheikh Mujibur Rahman Science and Technology University, Gopalganj</option>
-          <option value="Khulna Govt. Girls College">Khulna Govt. Girls College</option>
-          <option value="Govt. Phultala Mohila College">Govt. Phultala Mohila College</option>
-          <option value="Phultala MM College">Phultala MM College</option>
-          <option value="Noapara Model College">Noapara Model College</option>
-          <option value="Noapara Government College">Noapara Government College</option>
-          <option value="Daulatpur Day-Night College">Daulatpur Day-Night College</option>
+          <option value="Hajee Mohammad Danesh Science and Technology University (HSTU)">Hajee Mohammad Danesh Science and Technology University (HSTU)</option>
           <option value="others">Others</option>
         </select>
         <div class="invalid-feedback">Please select your university/institute/college.</div>
@@ -232,7 +205,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class="invalid-feedback">Passwords do not match.</div>
     </div> -->
 
-    <!-- Enroll Button -->
+    <p class="succuss_msg p-3"></p>
+
+    <!-- SUBMIT Button -->
     <button type="submit" name="REQUEST_METHOD"  class="btn btn-success w-100">Enroll</button>
      <div class="sdl_form_btn">
       <!-- Loading Spinner, initially hidden -->
@@ -240,8 +215,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <img src="assets/images/loading.gif" alt="Loading..." />
       </div>
      </div>
-    
-
   </form>
 </div>
 

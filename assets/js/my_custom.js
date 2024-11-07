@@ -48,7 +48,25 @@ $('#enrollmentForm').on('submit', function(event) {
 
         success: function(response) {
             if (response.success) {
-                alert("Enrollment successful!");
+                // alert("Enrollment successful!");
+
+                // successfull alert msg
+                function showSuccessMessage(message) {
+                    const successDiv = document.querySelector('.succuss_msg');
+                    successDiv.textContent = message;
+                    successDiv.style.display = 'block';
+                    successDiv.style.color = 'green';
+                    successDiv.style.fontWeight = 'bold';
+                    setTimeout(() => {
+                        successDiv.style.display = 'none';
+                    }, 3000); 
+                }
+                document.addEventListener('DOMContentLoaded', () => {
+                    document.querySelector('.succuss_msg').style.display = 'none';
+                });
+                showSuccessMessage('Form submitted successfully!');
+                // successfull alert msg end
+
                 $('#enrollmentForm')[0].reset(); // Clear the form
                 $('#enrollmentForm').removeClass('was-validated'); // Remove validation classes
                 $('.error-message').hide(); // Hide all error messages
@@ -77,6 +95,64 @@ $('#enrollmentForm').on('submit', function(event) {
                 errorMessage += error;
             }
             alert(errorMessage);
+        }
+    });
+});
+
+// databastable **************
+
+    $(document).ready(function() {
+    $('#studentTable').DataTable({
+        dom: 'Bfrtip', // Adds the buttons container
+        buttons: [
+            'colvis' // Adds a column visibility button
+        ],
+        responsive: true,
+        scrollX: true,
+        paging: true,        // Enable pagination
+        searching: true,     // Enable search functionality
+        ordering: true,      // Enable sorting
+        pageLength: 10,      // Set the number of entries per page
+        lengthMenu: [5, 10, 25, 50] // Define custom page length options
+    });
+});
+
+// delete enroll list item 
+$(document).ready(function() {
+    $(document).on('click', '.sdl_btnn', function(e) {
+        e.preventDefault(); // Prevent default link behavior
+
+        var studentID = $(this).data("id"); // Get the student's ID
+        var rowElement = $(this).closest('tr'); // The row to be deleted
+
+        if (confirm("Are you sure you want to delete this student?")) {
+            $.ajax({
+                type: "POST",
+                url: "../admin/delete_student.php", // Update with the correct path
+                data: { deleteid: studentID },
+
+                // Show spinner before sending the request
+                beforeSend: function() {
+                    $('#loadingSpinner').show();
+                },
+
+                success: function(response) {
+                    if (response === 'success') {
+                        rowElement.fadeOut(); // Fade out the row if successful
+                    } else {
+                        rowElement.fadeOut();;
+                    }
+                },
+
+                // Hide spinner once the request completes
+                complete: function() {
+                    $('#loadingSpinner').hide();
+                },
+
+                error: function() {
+                    alert("An error occurred while processing the request.");
+                }
+            });
         }
     });
 });
