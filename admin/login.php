@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 include '../connect.php';
 
 $error_user = '';
@@ -21,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_name'] = $user['user_name'];
             $_SESSION['status'] = $user['status'];
 
-            header("Location: ../admin/dashbord.php");
+            header("Location: ../admin/admin_panel.php");
             exit();
         } else {
             $error_password = "Incorrect password.";
@@ -30,42 +32,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error_user = "Username not found.";
     }
 }
-?>
 
+$page_title = "Login";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><?php echo $page_title ?></title>
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+  <link rel="stylesheet" href="../assets/css/app.css">
+  <link rel="stylesheet" href="../assets/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-
-<div class="container">
-    <h2 class="text-center mt-5">Admin Login</h2>
-    <form action="login.php" method="POST" class="mt-3">
-        <div class="form-group">
-            <label for="user_name">Username</label>
-            <input type="text" class="form-control" id="user_name" name="user_name" required>
-            <?php if ($error_user): ?>
-                <small class="text-danger"><?php echo $error_user; ?></small>
-            <?php endif; ?>
+<div class="sdl-login">
+    <div class="container">
+        <div class="login_cover d-md-flex g-5 p-md-3 p-lg-5 align-items-center">
+            <div class="login_box">
+                <h2 class="text-center mt-5 text-light">Admin Login</h2>
+                <form action="login.php" method="POST" class="mt-3 sdl_form">
+                    <div class="form-group group">
+                        <input type="text" class="form-control" id="user_name" name="user_name" placeholder="User Name" required>
+                        <?php if ($error_user): ?>
+                            <strong class="text-danger"><?php echo $error_user; ?></strong>
+                        <?php endif; ?>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="User Password" required>
+                        <?php if ($error_password): ?>
+                            <strong class="text-danger"><?php echo $error_password; ?></strong>
+                        <?php endif; ?>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btn sdl_btn">Login</button>
+                </form>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password" required>
-            <?php if ($error_password): ?>
-                <small class="text-danger"><?php echo $error_password; ?></small>
-            <?php endif; ?>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Login</button>
-    </form>
+    </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/my_custom.js"></script>
-</body>
-</html>
+<?php  include('../templates/footer.php') ?>

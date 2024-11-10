@@ -1,0 +1,3 @@
+SELECT id, student_name, mobile, email, 
+(SELECT course_name FROM `courses` WHERE id = preferred_course) as course_name 
+FROM `student_enrollment`;

@@ -48,18 +48,12 @@ $('#enrollmentForm').on('submit', function(event) {
 
         success: function(response) {
             if (response.success) {
-                // alert("Enrollment successful!");
-
-                // successfull alert msg
                 function showSuccessMessage(message) {
                     const successDiv = document.querySelector('.succuss_msg');
                     successDiv.textContent = message;
                     successDiv.style.display = 'block';
                     successDiv.style.color = 'green';
                     successDiv.style.fontWeight = 'bold';
-                    setTimeout(() => {
-                        successDiv.style.display = 'none';
-                    }, 3000); 
                 }
                 document.addEventListener('DOMContentLoaded', () => {
                     document.querySelector('.succuss_msg').style.display = 'none';
@@ -76,6 +70,7 @@ $('#enrollmentForm').on('submit', function(event) {
                 $.each(response.errors, function(field, message) {
                     
                     $('#' + field + '-error').text(message).show();
+                    document.getElementById('all-error').style.display = 'block';
                 });
             } else {
                 alert(response.message || "Unknown error occurred.");
@@ -99,23 +94,37 @@ $('#enrollmentForm').on('submit', function(event) {
     });
 });
 
-// databastable **************
 
-    $(document).ready(function() {
-    $('#studentTable').DataTable({
-        dom: 'Bfrtip', // Adds the buttons container
-        buttons: [
-            'colvis' // Adds a column visibility button
-        ],
+// databastable **************
+$(document).ready(function() {
+    var table = $('#studentTable').DataTable({
+        dom: 'Bfrtip',
+        buttons: ['colvis'],
+        select: true,
         responsive: true,
         scrollX: true,
-        paging: true,        // Enable pagination
-        searching: true,     // Enable search functionality
-        ordering: true,      // Enable sorting
-        pageLength: 10,      // Set the number of entries per page
-        lengthMenu: [5, 10, 25, 50] // Define custom page length options
+        paging: true,
+        searching: true,
+        ordering: true,
+        pageLength: 10,
+        lengthMenu: [5, 10, 25, 50]
+    });
+
+    // Filter the table based on course selection
+    $('#courseFilter').on('change', function() {
+        var selectedCourse = $(this).val();
+        
+        // Apply the filter to the DataTable
+        if (selectedCourse) {
+            // Assuming the course name is in the 2nd column (index 1)
+            table.column(1).search(selectedCourse).draw(); 
+        } else {
+            table.column(1).search('').draw();  // Clear the filter
+        }
     });
 });
+
+// databasetable table end
 
 // delete enroll list item 
 $(document).ready(function() {
@@ -198,6 +207,4 @@ document.querySelectorAll('.deleteCourseBtn').forEach(function(button) {
     });
 });
     
-
-
-
+// sidebar menu active

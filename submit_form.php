@@ -58,6 +58,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Prepare errors array
     $errors = [];
 
+    if (empty($preferredCourse)) {
+        $errors['email'] = '';
+    }
+    if (empty($studentName)) {
+        $errors['email'] = '';
+    }
+    if (empty($fatherName)) {
+        $errors['email'] = '';
+    }
+    if (empty($motherName)) {
+        $errors['email'] = '';
+    }
+    if (empty($guardianMobile)) {
+        $errors['email'] = '';
+    }
+    if (empty($uni)) {
+        $errors['email'] = '';
+    }
+    if (empty($deptSubject)) {
+        $errors['email'] = '';
+    }
+
     // Email validation
     if (empty($email)) {
         $errors['email'] = ''; // can use error message in this string

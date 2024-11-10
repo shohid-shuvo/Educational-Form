@@ -41,51 +41,44 @@ if (isset($_POST['courseName'])) {
     $stmt->close();
     $conn->close();
 }
+$page_title = "Manage Courses";
+include('../templates/header.php')
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Courses</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-</head>
-<body>
-    <div class="sdl_course_mngmnt">
-        <div class="container">
-            <h2>Manage Courses</h2>
 
-            <!-- Add Course Form -->
-            <form id="addCourseForm">
-                <input type="text" id="courseName" name="courseName" placeholder="Enter Course Name" required>
-                <button type="submit">Add Course</button>
-            </form>
-
-            <h3>Course List</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Course Name</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($row = $result->fetch_assoc()) { ?>
+    <div class="sdl_course_mngmnt pt-5">
+        <div class="sdl_add_crs_container row px-4">
+            <div class="sdl_add_crs_cvr col-md-5 pe-2 shadow d-flex align-self-baseline flex-column bg-light-subtle">
+                <h2 class="mb-2">Manage Courses</h2>
+                <!-- Add Course Form -->
+                <form id="addCourseForm">
+                    <input type="text" id="courseName" name="courseName" placeholder="Enter Course Name" required>
+                    <button type="submit" class="add_crs_btn mt-0">Add Course</button>
+                </form>
+            </div>
+            <div class="sdl_crs_list_cvr col-md-7 shadow">  
+                <h2>Course List</h2>
+                <table>
+                    <thead>
                         <tr>
-                            <td><?php echo $row['course_name']; ?></td>
-                            <td>
-                                <!-- Soft delete button (mark as deleted) -->
-                                <button class="deleteCourseBtn" data-id="<?php echo $row['id']; ?>">Delete</button>
-                            </td>
+                            <th>Course Name</th>
+                            <th>Actions</th>
                         </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php while ($row = $result->fetch_assoc()) { ?>
+                            <tr>
+                                <td><?php echo $row['course_name']; ?></td>
+                                <td width="200">
+                                    <!-- Soft delete button (mark as deleted) -->
+                                    <button class="deleteCourseBtn" data-id="<?php echo $row['id']; ?>"><img src="../assets/images/delete.png" class="me-2" alt="delete" width="22">Delete</button>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
-<script src="../assets/js/my_custom.js"></script>
+
+<?php  include('../templates/footer.php') ?>
